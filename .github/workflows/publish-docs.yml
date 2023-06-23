@@ -38,7 +38,10 @@ jobs:
         run: rm -Rf requirements.txt
       - name: Check install packages
         run: pip freeze
+        -name: Build docs
+        run: mkdocs build --clean
       - name: Deploy docs
-        uses: mhausenblas/mkdocs-deploy-gh-pages@1.16
-        env:
+        uses: peaceiris/action-gh-pages@v3
+        with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./site
